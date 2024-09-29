@@ -21,7 +21,6 @@ public class Main {
 
         dp = new Integer[n*3+1];
         dp[0] = arr[0];
-        dp[1] = arr[1];
 
         System.out.println(Math.min(Math.min(recur(n*3), recur(n*3-1)), recur(n*3-2)));
     }
