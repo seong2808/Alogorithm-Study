@@ -6,7 +6,7 @@ import java.util.StringTokenizer;
 class Node {
     int start;
     int end;
-    
+
     Node(int start, int end) {
         this.start = start;
         this.end = end;
@@ -19,13 +19,12 @@ public class Main {
         StringTokenizer tk;
 
         int N = Integer.parseInt(br.readLine());
-        Node[] node = new Node[N];
+        int[][] arr = new int[N][2];
 
         for (int i = 0; i < N; i++) {
             tk = new StringTokenizer(br.readLine());
-            int start = Integer.parseInt(tk.nextToken());
-            int end = Integer.parseInt(tk.nextToken());
-            node[i] = new Node(start, end);
+            arr[i][0] = Integer.parseInt(tk.nextToken());
+            arr[i][1] = Integer.parseInt(tk.nextToken());
         }
 
         if (N == 1) {
@@ -33,22 +32,24 @@ public class Main {
             return;
         }
 
-        Arrays.sort(node,(o1, o2) -> {
-            if (o1.start == o2.start)
-                return o1.end - o2.end;
-            return o1.start - o2.start;
+        Arrays.sort(arr,(o1, o2) -> {
+            if (o1[0] == o2[0])
+                return o1[1] - o2[1];
+            return o1[0] - o2[0];
         });
 
         PriorityQueue<Integer> pq = new PriorityQueue<>();
-        pq.offer(node[0].end);
-        
+        pq.offer(arr[0][1]);
+
         for (int i = 1; i < N; i++) {
-            if (pq.peek() <= node[i].start) {
+            if (pq.peek() <= arr[i][0]) {
                 pq.poll();
             }
-            pq.offer(node[i].end);
+            pq.offer(arr[i][1]);
         }
 
         System.out.println(pq.size());
     }
 }
+
+
